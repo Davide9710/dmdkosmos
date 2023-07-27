@@ -59,7 +59,7 @@ $ git clone git@github.com:iamtatsuyamori/jjebank.git
         - ``scalardb.properties`` : ScalarDB setting
         - ``schema.json`` : ScalarDB schema
 
-### MyBank.java
+### ``MyBank.java``
 #### Note
 - accountId is unique (in a table).
   - There can be user1 in mysql and postgres respectively.
@@ -84,7 +84,7 @@ $ git clone git@github.com:iamtatsuyamori/jjebank.git
 - cancel() : If the conditions are met, cancel the transactionId transaction.
 - getBalance() : Get information about balance of accountId account.
 
-### application.properties
+### ``application.properties``
 It is necessary to connect to MySQL before executing ``Main.java``.
 
 1. Create a database
@@ -108,7 +108,7 @@ spring.sql.init.data-locations=classpath:data.sql
 spring.sql.init.encoding=utf-8
 ```
 
-### scalardb.properties
+### ``scalardb.properties``
 Before executing ``Main.java``, the user name and password for MySQL and PostgreSQL must be registered in ``scalardb.properties``.
 1. MySQL
 ```properties
@@ -120,3 +120,10 @@ scalar.db.multi_storage.storages.mysql.password=123456
 scalar.db.multi_storage.storages.postgresql.username=postgres
 scalar.db.multi_storage.storages.postgresql.password=postgres
 ```
+
+### ``WebSecurityConfig.java``
+Since the implementation of the login function has not been completed, the login information is written in ``WebSecurityConfig.java``.
+
+#### Example
+- Username: m1
+- Password: m1
