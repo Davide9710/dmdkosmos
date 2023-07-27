@@ -6,6 +6,8 @@ JJE Bank is a banking system between different databases.
 - Both databases are used without modification.
 - However, it behaves as a single system.
 
+![UseCase](https://github.com/iamtatsuyamori/jjebank/assets/26143847/7cfd52d5-41cd-46d0-b25b-c0e3e6d0c8cf)
+
 ## Install Prerequisites
 JJE Bank is written in Java, and uses MySQL and PostgreSQL. So the following software is required to run it.
 - [Oracle OpenJDK 20](https://jdk.java.net/)
@@ -13,9 +15,9 @@ JJE Bank is written in Java, and uses MySQL and PostgreSQL. So the following sof
 - [PostgreSQL 12.15](https://www.postgresql.org/)
 - [IntelliJ IDEA](https://www.jetbrains.com/ja-jp/idea/) (recommended)
 
-## How to run
+## How to Run
 1. Open a terminal, go to your work directory, and clone this repository.
-```
+```shell
 $ git clone git@github.com:iamtatsuyamori/jjebank.git
 ```
 
@@ -30,17 +32,23 @@ $ git clone git@github.com:iamtatsuyamori/jjebank.git
 ## File Structure
 - ``src/main/``
     - ``java/com/example/test/``
+
         - ``controllers/``
-            - ``IndexController.java`` : Processing when index.html is loaded
-            - ``RemoveController.java`` : Processing when remove_form.html and remove_result.html are loaded
-            - ``TransactionController.java`` : Processing when transaction_form.html and transaction_result.html are loaded
+            - ``IndexController.java`` : Processing when ``index.html`` is loaded
+            - ``RemoveController.java`` : Processing when ``remove_form.html`` and ``remove_result.html`` are loaded
+            - ``TransactionController.java`` : Processing when ``transaction_form.html`` and ``transaction_result.html`` are loaded
+
         - ``models/``
+
         - ``scalardb/``
             - ``MyBank.java`` : ScalarDB processing
             - ``MyLoadInitialData.java`` : Load initial data into ScalarDB
             - ``MySchemaLoader.java`` : Load the schema into ScalarDB
+
         - ``Main.java`` : Main file
+
         - ``MainRunner.java`` : Run before Spring starts
+
         - ``WebSecurityConfig.java`` : Login information
 
     - ``resources/``
@@ -74,3 +82,40 @@ $ git clone git@github.com:iamtatsuyamori/jjebank.git
 - transfer() : Transfer amount from fromId account to toId account.
 - cancel() : If the conditions are met, cancel the transactionId transaction.
 - getBalance() : Get information about balance of accountId account.
+
+### application.properties
+It is necessary to connect to MySQL before executing ``Main.java``.
+
+1. Create a database
+```mysql
+mysql> create database spring_test;
+```
+2. Create a user
+```mysql
+mysql> create user 'jjebank'@'localhost' identified by '123456';
+mysql> grant all on spring_test.* to 'jjebank'@'localhost';
+```
+3. Application properties setting
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/spring_test
+spring.datasource.username=jjebank
+spring.datasource.password=123456
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.sql.init.mode=always
+spring.sql.init.schema-locations=classpath:schema.sql
+spring.sql.init.data-locations=classpath:data.sql
+spring.sql.init.encoding=utf-8
+```
+
+### scalardb.properties
+Before executing ``Main.java``, the user name and password for MySQL and PostgreSQL must be registered in ``scalardb.properties``.
+1. MySQL
+```properties
+scalar.db.multi_storage.storages.mysql.username=jjebank
+scalar.db.multi_storage.storages.mysql.password=123456
+```
+2. PostgreSQL
+```properties
+scalar.db.multi_storage.storages.postgresql.username=postgres
+scalar.db.multi_storage.storages.postgresql.password=postgres
+```
