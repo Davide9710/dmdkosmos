@@ -1,0 +1,145 @@
+@charset "UTF-8";
+/* html */
+html {
+    overflow-y: scroll;
+}
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+* {
+    font-family: OpenSans, sans-serif;
+}
+
+/* header */
+#header {
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
+    background-color: white;
+    z-index: 1000;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    padding-left: 50%;
+    padding-right: 50%;
+}
+#head_contents_top {
+    width: 800px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#logoArea {
+    font-size: 40px;
+    font-weight: bold;
+    color: #051F4E;
+    margin: 12px 0;
+}
+#head_contents_top input {
+    width: 85px;
+    background: #FFF;
+    border-radius: 1.875rem;
+    opacity: 1;
+    height: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+#head_contents_top input:hover {
+    color: #0d306e;
+}
+
+/* body */
+body {
+    margin: 0;
+    font-size: 22px;
+    color: #051F4E;
+}
+.maincontents {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 70px;
+}
+.welcome_area {
+    width: 800px;
+    margin: 0 auto;
+}
+.welcome_name {
+    font-size: 28px;
+    font-weight: bold;
+}
+.welcome_title {
+    font-size: 32px;
+    font-weight: bold;
+}
+.balance_area {
+    background: #FFF;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
+    border-radius: 1.875rem;
+    margin: 20px auto;
+    width: 800px;
+    height: 258px;
+    text-align: center;
+}
+.balance_area_inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+.balance_title {
+    margin: 40px 559px 0 60px;
+    font-size: 30px;
+}
+.balance {
+    margin: 30px 250px 30px 160px;
+    font-size: 70px;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+.transaction_area {
+    background: #153bff;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
+    border-radius: 1.875rem;
+    opacity: 1;
+    width: 400px;
+    height: 80px;
+    border: none;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+.transaction_area:hover {
+    background: #0428D1;
+}
+.transaction_text {
+    font-size: 22px;
+    color: #FFF;
+}
+.remove_area {
+    background: #FFF;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
+    border-radius: 1.875rem;
+    opacity: 1;
+    width: 400px;
+    height: 80px;
+    border: none;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+.remove_area:hover {
+    background: #f5f4f4;
+}
+.remove_text {
+    font-size: 22px;
+    color: #f60505;
+}
