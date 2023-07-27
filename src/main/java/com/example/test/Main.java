@@ -1,3 +1,7 @@
+/**
+ *  By Kazuki Ozeki
+ */
+
 package com.example.test;
 
 import org.springframework.boot.SpringApplication;

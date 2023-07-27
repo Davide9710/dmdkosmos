@@ -4,6 +4,7 @@
  *  References:
  *      https://scalardb.scalar-labs.com/docs/latest/scalardb-samples/multi-storage-transaction-sample/README/
  */
+
 package com.example.test.scalardb;
 
 import com.scalar.db.api.DistributedTransaction;

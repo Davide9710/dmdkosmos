@@ -1,6 +1,7 @@
 /**
  *  By Tatsuya Mori
  */
+
 package com.example.test;
 
 import com.example.test.scalardb.MyLoadInitialData;

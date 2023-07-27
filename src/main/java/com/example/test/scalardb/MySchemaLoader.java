@@ -1,9 +1,10 @@
 /**
- *  By Tatsuya
+ *  By Tatsuya Mori
  *
  *  References:
  *      https://scalardb.scalar-labs.com/docs/latest/schema-loader/
  */
+
 package com.example.test.scalardb;
 
 import com.scalar.db.schemaloader.SchemaLoader;
