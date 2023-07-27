@@ -17,7 +17,7 @@ JJE Bank is written in Java, and uses MySQL and PostgreSQL. So the following sof
 - [IntelliJ IDEA](https://www.jetbrains.com/ja-jp/idea/) (recommended)
 
 ## System Configurations
-The system configurations of JJE Bank is as follows.
+The system configurations of JJE Bank are as follows.
 - Web Framework
   - [Spring Boot 3.1.1](https://spring.io/projects/spring-boot)
 - Transaction Manager
