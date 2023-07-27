@@ -125,5 +125,5 @@ scalar.db.multi_storage.storages.postgresql.password=postgres
 Since the implementation of the login function has not been completed, the login information is written in ``WebSecurityConfig.java``.
 
 #### Example
-- Username: m1
-- Password: m1
+- Username: ``m1``
+- Password: ``m1``
