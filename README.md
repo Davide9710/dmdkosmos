@@ -16,6 +16,16 @@ JJE Bank is written in Java, and uses MySQL and PostgreSQL. So the following sof
 - [PostgreSQL 12.15](https://www.postgresql.org/)
 - [IntelliJ IDEA](https://www.jetbrains.com/ja-jp/idea/) (recommended)
 
+## System Configuration
+The system configuration of JJE Bank is as follows.
+- Web Framework
+  - [Spring Boot 3.1.1](https://spring.io/projects/spring-boot)
+- Transaction Manager
+  - [ScalarDB 3.9](https://scalar-labs.com/ja/products/scalardb)
+- Databases
+  - [MySQL 8.0](https://www.mysql.com/)
+  - [PostgreSQL 12.15](https://www.postgresql.org/)
+
 ## How to Run
 1. Open a terminal, go to your work directory, and clone this repository.
 ```shell
