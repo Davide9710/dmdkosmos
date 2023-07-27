@@ -59,31 +59,6 @@ $ git clone git@github.com:iamtatsuyamori/jjebank.git
         - ``scalardb.properties`` : ScalarDB setting
         - ``schema.json`` : ScalarDB schema
 
-### ``MyBank.java``
-#### Note
-- accountId is unique (in a table).
-  - There can be user1 in mysql and postgres respectively.
-- transactionId is unique.
-  - fromId, toId, and date are not the same at the same time.
-  - especially date is assumed not identical.
-  - the transactionId is represented by a concatenation of fromId, toId, and date.
-- the name of argument "table".
-  - In the real world, "table" name is regarded as "bank" name.
-- cannot deal with SimpleDateFormat well.
-  - date should be appropriate format.
-  - If date is not expressed in the proper format, unexpected behavior may occur.
-- any errors which developer were unaware may exist.
-  - throw errors for inappropriate operations as much as possible.
-- why date is required?
-  - to make it easy to check the debug.
-
-#### Functions
-- deposit() : Create an account with accountId and initialize its balance with amount, or if accountId account already exists, add amount to the balance.
-- withdraw() : Withdraw amount from accountId account.
-- transfer() : Transfer amount from fromId account to toId account.
-- cancel() : If the conditions are met, cancel the transactionId transaction.
-- getBalance() : Get information about balance of accountId account.
-
 ### ``application.properties``
 It is necessary to connect to MySQL before executing ``Main.java``.
 
@@ -127,3 +102,28 @@ Since the implementation of the login function has not been completed, the login
 #### Example
 - Username: ``m1``
 - Password: ``m1``
+
+### ``MyBank.java``
+#### Note
+- accountId is unique (in a table).
+    - There can be user1 in mysql and postgres respectively.
+- transactionId is unique.
+    - fromId, toId, and date are not the same at the same time.
+    - especially date is assumed not identical.
+    - the transactionId is represented by a concatenation of fromId, toId, and date.
+- the name of argument "table".
+    - In the real world, "table" name is regarded as "bank" name.
+- cannot deal with SimpleDateFormat well.
+    - date should be appropriate format.
+    - If date is not expressed in the proper format, unexpected behavior may occur.
+- any errors which developer were unaware may exist.
+    - throw errors for inappropriate operations as much as possible.
+- why date is required?
+    - to make it easy to check the debug.
+
+#### Functions
+- deposit() : Create an account with accountId and initialize its balance with amount, or if accountId account already exists, add amount to the balance.
+- withdraw() : Withdraw amount from accountId account.
+- transfer() : Transfer amount from fromId account to toId account.
+- cancel() : If the conditions are met, cancel the transactionId transaction.
+- getBalance() : Get information about balance of accountId account.
