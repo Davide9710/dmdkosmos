@@ -1,19 +1,13 @@
-/**
- *  By Tatsuya Mori, Kazuki Ozeki
- */
-
 package com.example.test.controllers;
 
 import com.example.test.models.entities.RemoveEntity;
-import com.example.test.models.entities.TransactionEntity;
 import com.example.test.scalardb.MyBank;
 import com.scalar.db.exception.transaction.TransactionException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.example.test.models.services.RemoveService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

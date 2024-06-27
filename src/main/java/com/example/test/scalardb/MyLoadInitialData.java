@@ -7,7 +7,12 @@
 
 package com.example.test.scalardb;
 
-import com.scalar.db.api.*;
+import com.scalar.db.api.DistributedTransaction;
+import com.scalar.db.api.DistributedTransactionAdmin;
+import com.scalar.db.api.DistributedTransactionManager;
+import com.scalar.db.api.Get;
+import com.scalar.db.api.Put;
+import com.scalar.db.api.Result;
 import com.scalar.db.exception.storage.ExecutionException;
 import com.scalar.db.exception.transaction.CrudException;
 import com.scalar.db.exception.transaction.TransactionException;

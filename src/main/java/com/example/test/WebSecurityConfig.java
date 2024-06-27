@@ -1,7 +1,3 @@
-/**
- *  By Kazuki Ozeki, Tatsuya Mori
- */
-
 package com.example.test;
 
 import org.springframework.context.annotation.Bean;
