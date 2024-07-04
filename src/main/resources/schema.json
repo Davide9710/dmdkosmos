@@ -1,56 +1,78 @@
 {
-  "mmybank.accounts": {
+  "mysqllibrary.accounts": {
     "transaction": true,
     "partition-key": [
       "accountId"
     ],
     "columns": {
       "accountId": "TEXT",
-      "accountName": "TEXT",
-      "balance": "INT"
+      "accountName": "TEXT"
     }
   },
-  "mmybank.transactions": {
+  "mysqllibrary.transactions": {
     "transaction": true,
     "partition-key": [
       "transactionId"
     ],
     "columns": {
       "transactionId": "TEXT",
-      "fromTable": "TEXT",
-      "fromId": "TEXT",
-      "toTable": "TEXT",
-      "toId": "TEXT",
-      "amount": "INT",
-      "date": "TEXT",
-      "flag": "INT"
+      "bookId": "TEXT",
+      "accountId": "TEXT",
+      "reservationDate": "TEXT",
+      "dueDate": "TEXT",
+      "returnDate": "TEXT",
+      "status": "TEXT"
     }
   },
-  "pmybank.accounts": {
+  "mysqllibrary.book": {
+    "transaction": true,
+    "partition-key": [
+      "bookId"
+    ],
+    "columns": {
+      "bookId": "TEXT",
+      "bookTitle": "TEXT",
+      "isAvailable": "INT",
+      "author": "TEXT",
+      "ISBN": "TEXT"
+    }
+  },
+  "postgrelibrary.accounts": {
     "transaction": true,
     "partition-key": [
       "accountId"
     ],
     "columns": {
       "accountId": "TEXT",
-      "accountName": "TEXT",
-      "balance": "INT"
+      "accountName": "TEXT"
     }
   },
-  "pmybank.transactions": {
+  "postgrelibrary.transactions": {
     "transaction": true,
     "partition-key": [
       "transactionId"
     ],
     "columns": {
       "transactionId": "TEXT",
-      "fromTable": "TEXT",
-      "fromId": "TEXT",
-      "toTable": "TEXT",
-      "toId": "TEXT",
-      "amount": "INT",
-      "date": "TEXT",
-      "flag": "INT"
+      "bookId": "TEXT",
+      "accountId": "TEXT",
+      "reservationDate": "TEXT",
+      "dueDate": "TEXT",
+      "returnDate": "TEXT",
+      "status": "TEXT"
+    }
+  },
+  "postgrelibrary.book": {
+    "transaction": true,
+    "partition-key": [
+      "bookId"
+    ],
+    "columns": {
+      "bookId": "TEXT",
+      "bookTitle": "TEXT",
+      "isAvailable": "INT",
+      "author": "TEXT",
+      "ISBN": "TEXT"
     }
   }
 }

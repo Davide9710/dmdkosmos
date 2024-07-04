@@ -1,10 +1,3 @@
-/**
- *  By Tatsuya Mori
- *  
- *  References:
- *      https://scalardb.scalar-labs.com/docs/latest/api-guide/#get-operation
- */
-
 package com.example.test.scalardb;
 
 import com.scalar.db.api.DistributedTransaction;
@@ -30,21 +23,21 @@ public class MyLoadInitialData {
         TransactionFactory transactionFactory = TransactionFactory.create(configFilePath);
 
         DistributedTransactionAdmin transactionAdmin = transactionFactory.getTransactionAdmin();
-        transactionAdmin.truncateTable("mmybank", "accounts");
-        transactionAdmin.truncateTable("pmybank", "accounts");
-//        transactionAdmin.dropTable("mmybank", "accounts");
-//        transactionAdmin.dropTable("pmybank", "accounts");
+        transactionAdmin.truncateTable("mysqllibrary", "accounts");
+        transactionAdmin.truncateTable("mysqllibrary", "transactions");
+        transactionAdmin.truncateTable("mysqllibrary", "book");
 
         DistributedTransactionManager transactionManager = transactionFactory.getTransactionManager();
         DistributedTransaction tx = null;
         try {
             tx = transactionManager.start();
-            putAccount(tx, "mmybank", "accounts", "m1", "Andy", 1000);
-            putAccount(tx, "mmybank", "accounts", "m2", "Becky", 2000);
-            putAccount(tx, "mmybank", "accounts", "m3", "Clare", 3000);
-            putAccount(tx, "pmybank", "accounts", "p1", "Daniel", 10000);
-            putAccount(tx, "pmybank", "accounts", "p2", "Elen", 20000);
-            putAccount(tx, "pmybank", "accounts", "p3", "Francis", 30000);
+            putAccount(tx, "mysqllibrary", "accounts", "m1", "Andy");
+            putAccount(tx, "mysqllibrary", "accounts", "m2", "Becky");
+            putAccount(tx, "mysqllibrary", "accounts", "m3", "Clare");
+            putBook(tx, "mysqllibrary", "book", "b1", "1984", 1, "George Orwell", "1234567890");
+            putBook(tx, "mysqllibrary", "book", "b2", "To Kill a Mockingbird", 1, "Harper Lee", "0987654321");
+            putTransaction(tx, "mysqllibrary", "transactions", "t1", "b1", "m1", "20230101", "20230115", null, "reserved");
+            putTransaction(tx, "mysqllibrary", "transactions", "t2", "b2", "m2", "20230101", "20230115", null, "reserved");
             tx.commit();
         } catch (TransactionException e) {
             if (tx != null) {
@@ -59,8 +52,7 @@ public class MyLoadInitialData {
             String namespace,
             String table,
             String id,
-            String name,
-            int balance
+            String name
     ) throws CrudException {
         Optional<Result> account =
                 tx.get(
@@ -76,8 +68,77 @@ public class MyLoadInitialData {
                             .namespace(namespace)
                             .table(table)
                             .partitionKey(Key.ofText("accountId", id))
-                            .textValue("accountName", name) // TODO
-                            .intValue("balance", balance)
+                            .textValue("accountName", name)
+                            .build()
+            );
+        }
+    }
+
+    public static void putTransaction(
+            DistributedTransaction tx,
+            String namespace,
+            String table,
+            String transactionId,
+            String bookId,
+            String accountId,
+            String reservationDate,
+            String dueDate,
+            String returnDate,
+            String status
+    ) throws CrudException {
+        Optional<Result> transaction =
+                tx.get(
+                        Get.newBuilder()
+                                .namespace(namespace)
+                                .table(table)
+                                .partitionKey(Key.ofText("transactionId", transactionId))
+                                .build()
+                );
+        if (!transaction.isPresent()) {
+            tx.put(
+                    Put.newBuilder()
+                            .namespace(namespace)
+                            .table(table)
+                            .partitionKey(Key.ofText("transactionId", transactionId))
+                            .textValue("bookId", bookId)
+                            .textValue("accountId", accountId)
+                            .textValue("reservationDate", reservationDate)
+                            .textValue("dueDate", dueDate)
+                            .textValue("returnDate", returnDate)
+                            .textValue("status", status)
+                            .build()
+            );
+        }
+    }
+
+    public static void putBook(
+            DistributedTransaction tx,
+            String namespace,
+            String table,
+            String bookId,
+            String bookTitle,
+            int isAvailable,
+            String author,
+            String isbn
+    ) throws CrudException {
+        Optional<Result> book =
+                tx.get(
+                        Get.newBuilder()
+                                .namespace(namespace)
+                                .table(table)
+                                .partitionKey(Key.ofText("bookId", bookId))
+                                .build()
+                );
+        if (!book.isPresent()) {
+            tx.put(
+                    Put.newBuilder()
+                            .namespace(namespace)
+                            .table(table)
+                            .partitionKey(Key.ofText("bookId", bookId))
+                            .textValue("bookTitle", bookTitle)
+                            .intValue("isAvailable", isAvailable)
+                            .textValue("author", author)
+                            .textValue("ISBN", isbn)
                             .build()
             );
         }

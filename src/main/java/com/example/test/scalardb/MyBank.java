@@ -46,9 +46,9 @@ public class MyBank {
     try {
       // Select table
       if (table.equals("mysql")) {
-        NAMESPACE = "mmybank";
+        NAMESPACE = "mysqllibrary";
       } else if (table.equals("postgres")) {
-        NAMESPACE = "pmybank";
+        NAMESPACE = "postgrelibrary";
       } else {
         throw new RuntimeException("The table name is invalid");
       }
@@ -94,9 +94,9 @@ public class MyBank {
     try {
       // Select table
       if (table.equals("mysql")) {
-        NAMESPACE = "mmybank";
+        NAMESPACE = "mysqllibrary";
       } else if (table.equals("postgres")) {
-        NAMESPACE = "pmybank";
+        NAMESPACE = "postgrelibrary";
       } else {
         throw new RuntimeException("The table name is invalid");
       }
@@ -146,17 +146,17 @@ public class MyBank {
     try {
       // Select table
       if (fromTable.equals("mysql")) {
-        FRNAMESPACE = "mmybank";
+        FRNAMESPACE = "mysqllibrary";
       } else if (fromTable.equals("postgres")) {
-        FRNAMESPACE = "pmybank";
+        FRNAMESPACE = "postgrelibrary";
       } else {
         throw new RuntimeException("The table name is invalid");
       }
 
       if (toTable.equals("mysql")) {
-        TONAMESPACE = "mmybank";
+        TONAMESPACE = "mysqllibrary";
       } else if (toTable.equals("postgres")) {
-        TONAMESPACE = "pmybank";
+        TONAMESPACE = "postgrelibrary";
       } else {
         throw new RuntimeException("The table name is invalid");
       }
@@ -286,14 +286,14 @@ public class MyBank {
       // Retrieve the ids, amount, date, and flag for transaction id
       Get myGet = 
         Get.newBuilder()
-          .namespace("mmybank")
+          .namespace("mysqllibrary")
           .table("transactions")
           .partitionKey(Key.ofText("transactionId", id))
           .build();
       Optional<Result> myResult = tx.get(myGet);
       Get poGet = 
         Get.newBuilder()
-          .namespace("pmybank")
+          .namespace("postgrelibrary")
           .table("transactions")
           .partitionKey(Key.ofText("transactionId", id))
           .build();
@@ -324,7 +324,7 @@ public class MyBank {
           // set flag as unavailable
           Put trPut =
             Put.newBuilder()
-              .namespace("mmybank")
+              .namespace("mysqllibrary")
               .table("transactions")
               .partitionKey(Key.ofText("transactionId", id))
               .intValue("flag", 0)
@@ -348,7 +348,7 @@ public class MyBank {
                 // set flag as unavailable
                 Put potrPut =
                   Put.newBuilder()
-                    .namespace("pmybank")
+                    .namespace("postgrelibrary")
                     .table("transactions")
                     .partitionKey(Key.ofText("transactionId", id))
                     .intValue("flag", 0)
@@ -369,17 +369,17 @@ public class MyBank {
 
         // Select table
         if (fromTable.equals("mysql")) {
-          FRNAMESPACE = "mmybank";
+          FRNAMESPACE = "mysqllibrary";
         } else if (fromTable.equals("postgres")) {
-          FRNAMESPACE = "pmybank";
+          FRNAMESPACE = "postgrelibrary";
         } else {
           throw new RuntimeException("The table name is invalid");
         }
 
         if (toTable.equals("mysql")) {
-          TONAMESPACE = "mmybank";
+          TONAMESPACE = "mysqllibrary";
         } else if (toTable.equals("postgres")) {
-          TONAMESPACE = "pmybank";
+          TONAMESPACE = "postgrelibrary";
         } else {
           throw new RuntimeException("The table name is invalid");
         }
@@ -442,7 +442,7 @@ public class MyBank {
           // set flag as unavailable
           Put trPut =
             Put.newBuilder()
-              .namespace("pmybank")
+              .namespace("postgrelibrary")
               .table("transactions")
               .partitionKey(Key.ofText("transactionId", id))
               .intValue("flag", 0)
@@ -477,17 +477,17 @@ public class MyBank {
         if (myflag != 1) {
           // Select table
           if (fromTable.equals("mysql")) {
-            FRNAMESPACE = "mmybank";
+            FRNAMESPACE = "mysqllibrary";
           } else if (fromTable.equals("postgres")) {
-            FRNAMESPACE = "pmybank";
+            FRNAMESPACE = "postgrelibrary";
           } else {
             throw new RuntimeException("The table name is invalid");
           }
 
           if (toTable.equals("mysql")) {
-            TONAMESPACE = "mmybank";
+            TONAMESPACE = "mysqllibrary";
           } else if (toTable.equals("postgres")) {
-            TONAMESPACE = "pmybank";
+            TONAMESPACE = "postgrelibrary";
           } else {
             throw new RuntimeException("The table name is invalid");
           }
@@ -556,9 +556,9 @@ public class MyBank {
     try {
       // Select table
       if (table.equals("mysql")) {
-        NAMESPACE = "mmybank";
+        NAMESPACE = "mysqllibrary";
       } else if (table.equals("postgres")) {
-        NAMESPACE = "pmybank";
+        NAMESPACE = "postgrelibrary";
       } else {
         throw new RuntimeException("The table name is invalid");
       }
@@ -598,9 +598,9 @@ public class MyBank {
     try {
       // Select table
       if (table.equals("mysql")) {
-        NAMESPACE = "mmybank";
+        NAMESPACE = "mysqllibrary";
       } else if (table.equals("postgres")) {
-        NAMESPACE = "pmybank";
+        NAMESPACE = "postgrelibrary";
       } else {
         throw new RuntimeException("The table name is invalid");
       }
