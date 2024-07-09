@@ -1,36 +1,167 @@
-<!-- By Kazuki Ozeki -->
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{/css/index.css}" rel="styleSheet">
-    <title>top</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>DMD Kosmos - Library Booking Service</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #051F4E, #1a4377);
+            color: #333;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #051F4E;
+        }
+
+        .user-name {
+            font-size: 18px;
+            font-weight: 500;
+            color: #051F4E;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            width: 300px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #051F4E;
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .maincontents {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 74px);
+            padding: 20px;
+        }
+
+        .book-status {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .book-status h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .book-status table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .book-status th,
+        .book-status td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .book-status th {
+            background-color: #f5f5f5;
+            font-weight: 500;
+        }
+
+        .manage-books-button {
+            display: inline-block;
+            background-color: #051F4E;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: inherit; /* This will maintain the original text color */
+        }
+
+        .logo:hover {
+            text-decoration: none; /* This ensures no underline appears on hover */
+        }
+        .manage-books-button:hover {
+            background-color: #1a4377;
+        }
+    </style>
 </head>
 <body>
-<div th:insert="~{common/header}"></div>
+<div class="header">
+    <a href="/" class="logo">DMD Kosmos</a>
+    <form th:action="@{/books}" method="get" class="search-form">
+        <input type="text" name="name" placeholder="Search books..." class="search-input">
+        <button type="submit" class="search-button">Search</button>
+    </form>
+    <div class="user-name" th:text="'Welcome, ' + ${accountName}"></div>
+</div>
 <div class="maincontents">
-    <div class="welcome_area">
-<!--        <p>Welcome back, <span class="welcome_name" th:inline="text"><span th:remove="tag" sec:authentication="name"></span></span> !</p>-->
-        <p>Welcome back, <span class="welcome_name" th:text="${accountName}"></span> (<span th:text="${accountId}"></span>)!</p>
+    <div class="book-status">
+        <h2>Book Status</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Deadline</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${bookedBooks}">
+                <td th:text="${book.name}"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.deadline}"></td>
+                <td>
+                    <form th:action="@{/return}" method="post">
+                        <input type="hidden" name="bookId" th:value="${book.id}">
+                        <input type="hidden" name="userId" th:value="${accountId}">
+                        <button type="submit">Return</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="balance_area">
-        <div class="balance_area_inner">
-            <p class="balance_title">Total Balance</p>
-            <p th:each="balance : ${balance}" class="balance">
-                <span class="yen">¥</span><span th:text="${balance}" class="money"></span>
-            </p>
-        </div>
-    </div>
-    <a href="transaction_form.html" th:href="@{/transaction}" class="transaction_area"><!-- "@{/issues}" @ はthymeleafでリンクを表す記法 -->
-        <span class="transaction_text">Start Transaction</span>
-    </a>
-    <a href="remove_list.html" th:href="@{/remove}" class="remove_area">
-        <span class="remove_text">Remove Transaction</span>
-    </a>
+<!--    <a href="manage-books.html" th:href="@{/manage-books}" class="manage-books-button">Manage Books</a>-->
 </div>
 </body>
 </html>
