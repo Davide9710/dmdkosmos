@@ -37,16 +37,6 @@
       "ISBN": "TEXT"
     }
   },
-  "postgrelibrary.accounts": {
-    "transaction": true,
-    "partition-key": [
-      "accountId"
-    ],
-    "columns": {
-      "accountId": "TEXT",
-      "accountName": "TEXT"
-    }
-  },
   "postgrelibrary.transactions": {
     "transaction": true,
     "partition-key": [
