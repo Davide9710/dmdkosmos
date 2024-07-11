@@ -1,7 +1,7 @@
 # JJE Bank
 
 ## About
-JJE Bank is a banking system between different databases.
+DMD Kosmos is a banking system between different databases.
 - Assume a scenario where Bank M, which uses MySQL, and Bank P, which uses PostgreSQL, merge.
 - Both databases are used without modification.
 - However, it behaves as a single system.
@@ -21,7 +21,7 @@ The system configurations of JJE Bank are as follows.
 - Web Framework
   - [Spring Boot 3.1.1](https://spring.io/projects/spring-boot)
 - Transaction Manager
-  - [ScalarDB 3.9](https://scalar-labs.com/ja/products/scalardb)
+  - [ScalarDB 3.13](https://scalar-labs.com/ja/products/scalardb)
 - Databases
   - [MySQL 8.0](https://www.mysql.com/)
   - [PostgreSQL 12.15](https://www.postgresql.org/)
@@ -71,41 +71,17 @@ $ git clone git@github.com:iamtatsuyamori/jjebank.git
         - ``scalardb.properties`` : ScalarDB setting
         - ``schema.json`` : ScalarDB schema
 
-### ``application.properties``
-It is necessary to connect to MySQL before executing ``Main.java``.
-
-1. Create a database
-```mysql
-mysql> create database spring_test;
-```
-2. Create a user
-```mysql
-mysql> create user 'jjebank'@'localhost' identified by '123456';
-mysql> grant all on spring_test.* to 'jjebank'@'localhost';
-```
-3. Application properties setting
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/spring_test
-spring.datasource.username=jjebank
-spring.datasource.password=123456
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.sql.init.mode=always
-spring.sql.init.schema-locations=classpath:schema.sql
-spring.sql.init.data-locations=classpath:data.sql
-spring.sql.init.encoding=utf-8
-```
-
 ### ``scalardb.properties``
 Before executing ``Main.java``, the user name and password for MySQL and PostgreSQL must be registered in ``scalardb.properties``.
 1. MySQL
 ```properties
-scalar.db.multi_storage.storages.mysql.username=jjebank
-scalar.db.multi_storage.storages.mysql.password=123456
+scalar.db.multi_storage.storages.mysql.username=root
+scalar.db.multi_storage.storages.mysql.password=root
 ```
 2. PostgreSQL
 ```properties
 scalar.db.multi_storage.storages.postgresql.username=postgres
-scalar.db.multi_storage.storages.postgresql.password=postgres
+scalar.db.multi_storage.storages.postgresql.password=root
 ```
 
 ### ``WebSecurityConfig.java``

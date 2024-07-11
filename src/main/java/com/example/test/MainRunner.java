@@ -14,8 +14,6 @@ public class MainRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("==================== TestApplicationRunner ====================");
-//        MySchemaLoader.run();
-//        System.out.println("MySchemaLoader.run(): Succeeded!");
         MyLoadInitialData.run();
         System.out.println("MyLoadInitialData.run(): Succeeded!");
     }

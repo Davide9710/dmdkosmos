@@ -2,10 +2,8 @@ package com.example.test.controllers;
 
 import com.example.test.dto.ReservedBookDTO;
 import com.example.test.models.entities.Book;
-import com.example.test.scalardbv2.MyLibrary;
+import com.example.test.scalardb.MyLibrary;
 import com.scalar.db.exception.transaction.TransactionException;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller

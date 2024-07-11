@@ -1,7 +1,7 @@
 package com.example.test.controllers;
 
 import com.example.test.dto.ReservedBookDTO;
-import com.example.test.scalardbv2.MyLibrary;
+import com.example.test.scalardb.MyLibrary;
 import com.scalar.db.exception.transaction.TransactionException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

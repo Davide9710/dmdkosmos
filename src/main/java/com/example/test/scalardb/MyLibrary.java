@@ -1,4 +1,4 @@
-package com.example.test.scalardbv2;
+package com.example.test.scalardb;
 
 import com.example.test.dto.ReservedBookDTO;
 import com.example.test.models.entities.Book;
