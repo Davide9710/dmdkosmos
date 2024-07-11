@@ -19,7 +19,7 @@ public class TransactionControllerV2Test {
     private MockMvc mockMvc;
 
     @Test
-    @WithMockUser(username = "m2")
+    @WithMockUser(username = "daichi")
     public void testReserveAvailableBook() throws Exception {
         mockMvc.perform(post("/reserve")
                         .param("bookId", "b2"))
@@ -28,7 +28,7 @@ public class TransactionControllerV2Test {
     }
 
     @Test
-    @WithMockUser(username = "m1")
+    @WithMockUser(username = "davide")
     public void testReserveUnavailableBook() throws Exception {
         mockMvc.perform(post("/reserve")
                         .param("bookId", "b1"))
@@ -37,7 +37,7 @@ public class TransactionControllerV2Test {
     }
 
     @Test
-    @WithMockUser(username = "m2")
+    @WithMockUser(username = "daichi")
     public void testMakeBookUnavailableAndReserveIt() throws Exception {
         mockMvc.perform(post("/reserve")
                         .param("bookId", "b2"))
@@ -52,7 +52,7 @@ public class TransactionControllerV2Test {
     }
 
     @Test
-    @WithMockUser(username = "m1")
+    @WithMockUser(username = "davide")
     public void testReturnBook() throws Exception {
         mockMvc.perform(post("/return")
                         .param("bookId", "b1"))
@@ -61,7 +61,7 @@ public class TransactionControllerV2Test {
     }
 
     @Test
-    @WithMockUser(username = "m2")
+    @WithMockUser(username = "daichi")
     public void testReturnUnreservedBook() throws Exception {
         mockMvc.perform(post("/return")
                         .param("bookId", "b2"))
@@ -70,7 +70,7 @@ public class TransactionControllerV2Test {
     }
 
     @Test
-    @WithMockUser(username = "m2")
+    @WithMockUser(username = "daichi")
     public void testReturnWithDifferentAccount() throws Exception {
         mockMvc.perform(post("/return")
                         .param("bookId", "b1"))
@@ -79,7 +79,7 @@ public class TransactionControllerV2Test {
     }
 
     @Test
-    @WithMockUser(username = "m1")
+    @WithMockUser(username = "davide")
     public void testReturnBookAndThenReserveIt() throws Exception {
         mockMvc.perform(post("/return")
                         .param("bookId", "b1"))

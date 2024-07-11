@@ -106,6 +106,8 @@
     <a href="/" class="logo">DMD Kosmos</a>
     <form th:action="@{/books}" method="get" class="search-form">
       <input type="text" name="name" placeholder="Search books..." class="search-input">
+      <input type="hidden" name="accountId" th:value="${accountId}">
+      <input type="hidden" name="accountName" th:value="${accountName}">
       <button type="submit" class="search-button">Search</button>
     </form>
   </div>
@@ -120,6 +122,8 @@
             <p><strong>Availability:</strong> <span th:text="${book.isAvailable == 1 ? 'Available' : 'Not Available'}"></span></p>
             <form th:if="${book.isAvailable == 1}" th:action="@{/books/reserve}" method="post">
               <input type="hidden" name="bookId" th:value="${book.id}">
+              <input type="hidden" name="accountId" th:value="${accountId}">
+              <input type="hidden" name="accountName" th:value="${accountName}">
               <button type="submit" class="reserve-button">Reserve</button>
             </form>
           </div>

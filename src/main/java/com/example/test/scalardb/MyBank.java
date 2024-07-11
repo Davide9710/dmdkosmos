@@ -547,42 +547,33 @@ public class MyBank {
     }
   }
 
-  public static String getAccountName(String table, String id) throws TransactionException, IOException {
+  public static String getAccountId(String accountName) throws TransactionException, IOException {
     Path configFilePath = Paths.get("src/main/resources/scalardb.properties");
     TransactionFactory transactionFactory = TransactionFactory.create(configFilePath);
     DistributedTransactionManager transactionManager = transactionFactory.getTransactionManager();
     DistributedTransaction tx = transactionManager.start();
+    NAMESPACE = "mysqllibrary";
 
     try {
-      // Select table
-      if (table.equals("mysql")) {
-        NAMESPACE = "mysqllibrary";
-      } else if (table.equals("postgres")) {
-        NAMESPACE = "postgrelibrary";
-      } else {
-        throw new RuntimeException("The table name is invalid");
-      }
-
-      // Retrieve the current balances for id
       Get get =
               Get.newBuilder()
                       .namespace(NAMESPACE)
                       .table("account")
-                      .partitionKey(Key.ofText("accountId", id))
+                      .partitionKey(Key.ofText("accountName", accountName))
                       .build();
       Optional<Result> result = tx.get(get);
 
-      String accountName = "";
+      String accountId = "";
       if (result.isPresent()) {
-        accountName = result.get().getText("accountName");
+        accountId = result.get().getText("accountId");
       } else {
-        throw new RuntimeException("The id is invalid");
+        throw new RuntimeException("The name is invalid");
       }
 
       // Commit the transaction
       tx.commit();
 
-      return accountName;
+      return accountId;
     } catch (Exception e) {
       tx.abort();
       throw e;

@@ -36,32 +36,25 @@ public class WebSecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails user1 =
                 User.withDefaultPasswordEncoder()
-                        .username("m1")
-                        .password("m1")
+                        .username("davide")
+                        .password("davide")
                         .roles("USER")
                         .build();
 
         UserDetails user2 =
                 User.withDefaultPasswordEncoder()
-                        .username("m2")
-                        .password("m2")
+                        .username("daichi")
+                        .password("daichi")
                         .roles("USER")
                         .build();
 
         UserDetails user3 =
                 User.withDefaultPasswordEncoder()
-                        .username("p1")
-                        .password("p1")
+                        .username("masaya")
+                        .password("masaya")
                         .roles("USER")
                         .build();
 
-        UserDetails user4 =
-                User.withDefaultPasswordEncoder()
-                        .username("p2")
-                        .password("p2")
-                        .roles("USER")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user1, user2, user3, user4);
+        return new InMemoryUserDetailsManager(user1, user2, user3);
     }
 }

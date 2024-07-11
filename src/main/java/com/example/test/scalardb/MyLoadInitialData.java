@@ -34,12 +34,34 @@ public class MyLoadInitialData {
         DistributedTransaction tx = null;
         try {
             tx = transactionManager.start();
-            putAccount(tx, "mysqllibrary", "account", "m1", "Andy");
-            putAccount(tx, "mysqllibrary", "account", "m2", "Becky");
-            putAccount(tx, "mysqllibrary", "account", "m3", "Clare");
-            putBook(tx, "mysqllibrary", "book", "b1", "1984", 0, "George Orwell", "1234567890");
-            putBook(tx, "postgrelibrary", "book", "b2", "To Kill a Mockingbird", 1, "Harper Lee", "ISBN-0987654321");
-            putTransaction(tx, "mysqllibrary", "transaction", "t1", "b1", "m1", "20240711", "20240725", null, "RESERVED");
+            // Accounts (already provided)
+            putAccount(tx, "mysqllibrary", "account", "1", "davide");
+            putAccount(tx, "mysqllibrary", "account", "2", "daichi");
+            putAccount(tx, "mysqllibrary", "account", "3", "masaya");
+
+            // Books
+            putBook(tx, "mysqllibrary", "book", "1", "1984", 0, "George Orwell", "1234567890");
+            putBook(tx, "postgrelibrary", "book", "2", "To Kill a Mockingbird", 1, "Harper Lee", "0987654321");
+            putBook(tx, "mysqllibrary", "book", "3", "The Great Gatsby", 0, "F. Scott Fitzgerald", "1122334455");
+            putBook(tx, "postgrelibrary", "book", "4", "Pride and Prejudice", 0, "Jane Austen", "2233445566");
+            putBook(tx, "mysqllibrary", "book", "5", "The Catcher in the Rye", 0, "J.D. Salinger", "3344556677");
+            putBook(tx, "postgrelibrary", "book", "6", "One Hundred Years of Solitude", 1, "Gabriel García Márquez", "4455667788");
+            putBook(tx, "postgrelibrary", "book", "7", "Two Hundred Years of Solitude", 1, "Gabriel García Márquez", "4455667789");
+
+            // Transactions
+            // For davide (accountId: 1)
+            putTransaction(tx, "mysqllibrary", "transaction", "1", "1", "1", "20240711", "20240725", null, "RESERVED");
+            putTransaction(tx, "postgrelibrary", "transaction", "2", "2", "1", "20240712", "20240726", "20240702", "RETURNED");
+            putTransaction(tx, "mysqllibrary", "transaction", "3", "3", "1", "20240713", "20240727", null, "RESERVED");
+
+            // For daichi (accountId: 2)
+            putTransaction(tx, "postgrelibrary", "transaction", "4", "4", "2", "20240714", "20240728", null, "RESERVED");
+            putTransaction(tx, "mysqllibrary", "transaction", "5", "5", "2", "20240715", "20240729", null, "RESERVED");
+            putTransaction(tx, "postgrelibrary", "transaction", "6", "6", "2", "20240716", "20240730", "20240705", "RETURNED");
+
+            // For masaya (accountId: 3)
+            putTransaction(tx, "postgrelibrary", "transaction", "7", "2", "3", "20240717", "20240731", "20240725", "RETURNED");
+
             tx.commit();
         } catch (TransactionException e) {
             if (tx != null) {

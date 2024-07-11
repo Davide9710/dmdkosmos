@@ -127,6 +127,8 @@
     <a href="/" class="logo">DMD Kosmos</a>
     <form th:action="@{/books}" method="get" class="search-form">
         <input type="text" name="name" placeholder="Search books..." class="search-input">
+        <input type="hidden" name="accountId" th:value="${accountId}">
+        <input type="hidden" name="accountName" th:value="${accountName}">
         <button type="submit" class="search-button">Search</button>
     </form>
     <div class="user-name" th:text="'Welcome, ' + ${accountName}"></div>
@@ -137,23 +139,24 @@
         <table>
             <thead>
             <tr>
-                <th>Name</th>
                 <th>Title</th>
                 <th>Author</th>
+                <th>ISBN</th>
                 <th>Deadline</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="book : ${bookedBooks}">
-                <td th:text="${book.name}"></td>
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.author}"></td>
+                <td th:text="${book.isbn}"></td>
                 <td th:text="${book.deadline}"></td>
                 <td>
-                    <form th:action="@{/return}" method="post">
+                    <form th:action="@{/books/return}" method="post">
                         <input type="hidden" name="bookId" th:value="${book.id}">
-                        <input type="hidden" name="userId" th:value="${accountId}">
+                        <input type="hidden" name="accountId" th:value="${accountId}">
+                        <input type="hidden" name="accountName" th:value="${accountName}">
                         <button type="submit">Return</button>
                     </form>
                 </td>

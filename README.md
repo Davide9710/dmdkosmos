@@ -35,10 +35,12 @@ $ git clone git@github.com:iamtatsuyamori/jjebank.git
 2. Open a project in JetBrains' [IntelliJ IDEA](https://www.jetbrains.com/ja-jp/idea/).
 
 3. Reload a project on ``pom.xml``.
+4. Open the command prompt in the folder src/main/resources
+5. Run the command: ``$ java -jar scalardb-schema-loader-3.13.0.jar --config scalardb.properties --schema-file schema.json --coordinator``, this will create the schemas
 
-4. Run ``Main.java``.
+6. Run ``Main.java``.
 
-5. Access on http://localhost:8080/.
+7. Access on http://localhost:8080/.
 
 ## File Structure
 - ``src/main/``
@@ -110,8 +112,8 @@ scalar.db.multi_storage.storages.postgresql.password=postgres
 Since the implementation of the login function has not been completed, the login information is written in ``WebSecurityConfig.java``.
 
 #### Example
-- Username: ``m1``
-- Password: ``m1``
+- Username: ``davide``
+- Password: ``davide``
 
 ### ``MyBank.java``
 #### Note
