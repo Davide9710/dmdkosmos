@@ -1,6 +1,6 @@
-TRUNCATE TABLE accounts;
+TRUNCATE TABLE account;
 TRUNCATE TABLE book;
-INSERT INTO accounts(accountId, accountName)
+INSERT INTO account(accountId, accountName)
 values ('m1', 'Andy'),
        ('m2', 'Becky'),
        ('m3', 'Clare'),

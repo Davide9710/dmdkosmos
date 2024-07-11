@@ -4,6 +4,7 @@ import com.example.test.models.entities.BookReservationEntity;
 import com.example.test.scalardbv2.MyLibrary;
 import com.scalar.db.exception.transaction.TransactionException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,22 +26,20 @@ public class TransactionControllerV2 {
 //    }
 
     @PostMapping("/reserve")
-    public String processReservation(
+    public ResponseEntity<String> processReservation(
             @RequestParam("bookId") String bookId,
-            @ModelAttribute BookReservationEntity bookReservationEntity,
-            Authentication authentication,
-            Model model
-    ) throws TransactionException, IOException {
+            Authentication authentication
+    ) {
         String accountId = authentication.getName();
 
-        String transactionId = MyLibrary.reserveBook(bookId, accountId);
+        try {
+            MyLibrary.reserveBook(bookId, accountId);
 
-        model.addAttribute("transactionId", transactionId);
-        model.addAttribute("bookId", bookId);
-        model.addAttribute("accountId", accountId);
-//        model.addAttribute("bookTitle", mylibrary.getBookTitle(bookId));
-
-        return "reserve_result";
+            return ResponseEntity.ok("Ok");
+        } catch (Exception e) {
+            // Log the exception
+            return ResponseEntity.badRequest().body("Ko");
+        }
     }
 
 //    @GetMapping("/return")
@@ -50,21 +49,19 @@ public class TransactionControllerV2 {
 //    }
 
     @PostMapping("/return")
-    public String processReturn(
+    public ResponseEntity<String> processReturn(
             @RequestParam("bookId") String bookId,
-            @ModelAttribute BookReservationEntity bookReservationEntity,
-            Authentication authentication,
-            Model model
-    ) throws TransactionException, IOException, ParseException {
+            Authentication authentication
+    ) {
         String accountId = authentication.getName();
 
-        String result = MyLibrary.returnBook(bookId, accountId);
+        try {
+            MyLibrary.returnBook(bookId, accountId);
 
-        model.addAttribute("result", result);
-        model.addAttribute("bookId", bookId);
-        model.addAttribute("accountId", accountId);
-//        model.addAttribute("bookTitle", mylibrary.getBookTitle(bookId));
-
-        return "return_result";
+            return ResponseEntity.ok("Ok");
+        } catch (Exception e) {
+            // Log the exception
+            return ResponseEntity.badRequest().body("Ko");
+        }
     }
 }

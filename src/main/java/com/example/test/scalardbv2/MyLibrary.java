@@ -84,7 +84,7 @@ public class MyLibrary {
             // Create transaction record
             Put transactionPut = Put.newBuilder()
                     .namespace(namespace)
-                    .table("transactions")
+                    .table("transaction")
                     .partitionKey(Key.ofText("transactionId", transactionId))
                     .textValue("bookId", bookId)
                     .textValue("accountId", accountId)
@@ -118,7 +118,7 @@ public class MyLibrary {
             for (String ns : new String[]{"mysqllibrary", "postgrelibrary"}) {
                 Get bookGet = Get.newBuilder()
                         .namespace(ns)
-                        .table("books")
+                        .table("book")
                         .partitionKey(Key.ofText("bookId", bookId))
                         .build();
                 Optional<Result> bookResult = tx.get(bookGet);
@@ -135,7 +135,7 @@ public class MyLibrary {
             // Check if the book is currently unavailable (i.e., it's borrowed)
             Get bookGet = Get.newBuilder()
                     .namespace(namespace)
-                    .table("books")
+                    .table("book")
                     .partitionKey(Key.ofText("bookId", bookId))
                     .build();
             Optional<Result> bookResult = tx.get(bookGet);
@@ -147,7 +147,7 @@ public class MyLibrary {
             // Find the latest transaction for this book
             Scan transactionScan = Scan.newBuilder()
                     .namespace(namespace)
-                    .table("transactions")
+                    .table("transaction")
                     .all()
                     .build();
             List<Result> transactions = tx.scan(transactionScan);
@@ -168,7 +168,7 @@ public class MyLibrary {
             // Update book availability
             Put bookPut = Put.newBuilder()
                     .namespace(namespace)
-                    .table("books")
+                    .table("book")
                     .partitionKey(Key.ofText("bookId", bookId))
                     .intValue("isAvailable", 1)
                     .build();
@@ -193,7 +193,7 @@ public class MyLibrary {
             // Update transaction record
             Put transactionPut = Put.newBuilder()
                     .namespace(namespace)
-                    .table("transactions")
+                    .table("transaction")
                     .partitionKey(Key.ofText("transactionId", transaction.getText("transactionId")))
                     .textValue("returnDate", returnDate)
                     .textValue("status", "RETURNED")

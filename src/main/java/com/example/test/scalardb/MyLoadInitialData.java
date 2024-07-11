@@ -23,21 +23,23 @@ public class MyLoadInitialData {
         TransactionFactory transactionFactory = TransactionFactory.create(configFilePath);
 
         DistributedTransactionAdmin transactionAdmin = transactionFactory.getTransactionAdmin();
-        transactionAdmin.truncateTable("mysqllibrary", "accounts");
-        transactionAdmin.truncateTable("mysqllibrary", "transactions");
+        transactionAdmin.truncateTable("mysqllibrary", "account");
+        transactionAdmin.truncateTable("mysqllibrary", "transaction");
         transactionAdmin.truncateTable("mysqllibrary", "book");
+
+        transactionAdmin.truncateTable("postgrelibrary", "transaction");
+        transactionAdmin.truncateTable("postgrelibrary", "book");
 
         DistributedTransactionManager transactionManager = transactionFactory.getTransactionManager();
         DistributedTransaction tx = null;
         try {
             tx = transactionManager.start();
-            putAccount(tx, "mysqllibrary", "accounts", "m1", "Andy");
-            putAccount(tx, "mysqllibrary", "accounts", "m2", "Becky");
-            putAccount(tx, "mysqllibrary", "accounts", "m3", "Clare");
-            putBook(tx, "mysqllibrary", "book", "b1", "1984", 1, "George Orwell", "1234567890");
-            putBook(tx, "mysqllibrary", "book", "b2", "To Kill a Mockingbird", 1, "Harper Lee", "0987654321");
-            putTransaction(tx, "mysqllibrary", "transactions", "t1", "b1", "m1", "20230101", "20230115", null, "reserved");
-            putTransaction(tx, "mysqllibrary", "transactions", "t2", "b2", "m2", "20230101", "20230115", null, "reserved");
+            putAccount(tx, "mysqllibrary", "account", "m1", "Andy");
+            putAccount(tx, "mysqllibrary", "account", "m2", "Becky");
+            putAccount(tx, "mysqllibrary", "account", "m3", "Clare");
+            putBook(tx, "mysqllibrary", "book", "b1", "1984", 0, "George Orwell", "1234567890");
+            putBook(tx, "postgrelibrary", "book", "b2", "To Kill a Mockingbird", 1, "Harper Lee", "0987654321");
+            putTransaction(tx, "mysqllibrary", "transaction", "t1", "b1", "m1", "20240711", "20240725", null, "RESERVED");
             tx.commit();
         } catch (TransactionException e) {
             if (tx != null) {

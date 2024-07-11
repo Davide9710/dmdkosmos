@@ -1,5 +1,5 @@
 {
-  "mysqllibrary.accounts": {
+  "mysqllibrary.account": {
     "transaction": true,
     "partition-key": [
       "accountId"
@@ -9,7 +9,7 @@
       "accountName": "TEXT"
     }
   },
-  "mysqllibrary.transactions": {
+  "mysqllibrary.transaction": {
     "transaction": true,
     "partition-key": [
       "transactionId"
@@ -37,7 +37,7 @@
       "ISBN": "TEXT"
     }
   },
-  "postgrelibrary.transactions": {
+  "postgrelibrary.transaction": {
     "transaction": true,
     "partition-key": [
       "transactionId"
