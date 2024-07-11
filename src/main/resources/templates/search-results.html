@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>DMD Kosmos - Search Results</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(45deg, #051F4E, #1a4377);
+        color: #333;
+      }
+
+      .header {
+        background-color: #fff;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 600;
+        color: #051F4E;
+      }
+
+      .search-form {
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+      }
+
+      .search-input {
+        padding: 10px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        width: 300px;
+      }
+
+      .search-button {
+        padding: 10px 20px;
+        background-color: #051F4E;
+        color: #fff;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+      }
+
+      .maincontents {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 74px);
+        padding: 20px;
+      }
+
+      .search-results {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 800px;
+      }
+
+      .search-results h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+
+      .book-details {
+        margin-bottom: 30px;
+      }
+
+      .book-details h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .book-details p {
+        margin: 5px 0;
+      }
+
+      .no-results {
+        text-align: center;
+        color: #777;
+      }
+
+      .logo {
+        text-decoration: none;
+        color: inherit; /* This will maintain the original text color */
+      }
+
+      .logo:hover {
+        text-decoration: none; /* This ensures no underline appears on hover */
+      }    </style>
+  </head>
+
+  <body>
+  <div class="header">
+    <a href="/" class="logo">DMD Kosmos</a>
+    <form th:action="@{/books}" method="get" class="search-form">
+      <input type="text" name="name" placeholder="Search books..." class="search-input">
+      <button type="submit" class="search-button">Search</button>
+    </form>
+  </div>
+    <div class="maincontents">
+      <div class="search-results">
+        <h2>Search Results</h2>
+        <div th:if="${not #lists.isEmpty(books)}">
+          <div th:each="book : ${books}" class="book-details">
+            <h3 th:text="${book.title}"></h3>
+            <p><strong>Author:</strong> <span th:text="${book.author}"></span></p>
+            <p><strong>ISBN:</strong> <span th:text="${book.isbn}"></span></p>
+            <p><strong>Availability:</strong> <span th:text="${book.available ? 'Available' : 'Not Available'}"></span></p>
+            <form th:if="${book.available}" th:action="@{/books/reserve}" method="post">
+              <input type="hidden" name="bookId" th:value="${book.id}">
+              <button type="submit" class="reserve-button">Reserve</button>
+            </form>
+          </div>
+        </div>
+        <div th:if="${#lists.isEmpty(books)}" class="no-results">
+          <p>No books found.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
