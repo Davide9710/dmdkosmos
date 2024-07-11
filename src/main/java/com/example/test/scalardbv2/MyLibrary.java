@@ -1,5 +1,6 @@
 package com.example.test.scalardbv2;
 
+import com.example.test.models.entities.Book;
 import com.scalar.db.api.DistributedTransaction;
 import com.scalar.db.api.DistributedTransactionManager;
 import com.scalar.db.api.Get;
@@ -15,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -204,6 +206,50 @@ public class MyLibrary {
             tx.commit();
 
             return message.isEmpty() ? "Book returned successfully" : message;
+        } catch (Exception e) {
+            tx.abort();
+            throw e;
+        }
+    }
+
+    public static List<Book> searchBooks(String searchText) throws TransactionException, IOException {
+        Path configFilePath = Paths.get("src/main/resources/scalardb.properties");
+        TransactionFactory transactionFactory = TransactionFactory.create(configFilePath);
+        DistributedTransactionManager transactionManager = transactionFactory.getTransactionManager();
+        DistributedTransaction tx = transactionManager.start();
+
+        List<Book> results = new ArrayList<>();
+
+        try {
+            // Search in both namespaces
+            for (String namespace : new String[]{"mysqllibrary", "postgrelibrary"}) {
+                Scan scan = Scan.newBuilder()
+                        .namespace(namespace)
+                        .table("book")
+                        .all()
+                        .build();
+
+                List<Result> scanResults = tx.scan(scan);
+
+                for (Result result : scanResults) {
+                    String name = result.getText("bookTitle");
+                    String author = result.getText("author");
+                    if (name.toLowerCase().contains(searchText.toLowerCase()) ||
+                            author.toLowerCase().contains(searchText.toLowerCase())) {
+                        Book book = new Book(
+                                result.getText("bookId"),
+                                name,
+                                author,
+                                result.getInt("isAvailable"),
+                                result.getText("isbn")
+                        );
+                        results.add(book);
+                    }
+                }
+            }
+
+            tx.commit();
+            return results;
         } catch (Exception e) {
             tx.abort();
             throw e;

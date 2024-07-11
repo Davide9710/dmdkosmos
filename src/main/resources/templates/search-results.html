@@ -117,8 +117,8 @@
             <h3 th:text="${book.title}"></h3>
             <p><strong>Author:</strong> <span th:text="${book.author}"></span></p>
             <p><strong>ISBN:</strong> <span th:text="${book.isbn}"></span></p>
-            <p><strong>Availability:</strong> <span th:text="${book.available ? 'Available' : 'Not Available'}"></span></p>
-            <form th:if="${book.available}" th:action="@{/books/reserve}" method="post">
+            <p><strong>Availability:</strong> <span th:text="${book.isAvailable == 1 ? 'Available' : 'Not Available'}"></span></p>
+            <form th:if="${book.isAvailable == 1}" th:action="@{/books/reserve}" method="post">
               <input type="hidden" name="bookId" th:value="${book.id}">
               <button type="submit" class="reserve-button">Reserve</button>
             </form>

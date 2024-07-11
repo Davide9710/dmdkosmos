@@ -13,6 +13,7 @@ import java.io.IOException;
 @Controller
 @RequestMapping()
 public class IndexController {
+
     @GetMapping()
     public String index(Authentication authentication,  Model model) throws IOException, TransactionException {
         String accountId = authentication.getName();
@@ -23,11 +24,11 @@ public class IndexController {
             table = "postgres";
         }
         String accountName = MyBank.getAccountName(table, accountId);
-        int balance = MyBank.getBalance(table, accountId);
+//        int balance = MyBank.getBalance(table, accountId);
 
         model.addAttribute("accountId", accountId);
         model.addAttribute("accountName", accountName);
-        model.addAttribute("balance", balance);
+//        model.addAttribute("balance", balance);
 
         return "index";
     }

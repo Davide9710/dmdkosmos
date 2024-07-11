@@ -34,7 +34,7 @@
       "bookTitle": "TEXT",
       "isAvailable": "INT",
       "author": "TEXT",
-      "ISBN": "TEXT"
+      "isbn": "TEXT"
     }
   },
   "postgrelibrary.transaction": {
@@ -62,7 +62,7 @@
       "bookTitle": "TEXT",
       "isAvailable": "INT",
       "author": "TEXT",
-      "ISBN": "TEXT"
+      "isbn": "TEXT"
     }
   }
 }

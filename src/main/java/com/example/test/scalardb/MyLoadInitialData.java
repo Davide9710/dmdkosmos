@@ -38,7 +38,7 @@ public class MyLoadInitialData {
             putAccount(tx, "mysqllibrary", "account", "m2", "Becky");
             putAccount(tx, "mysqllibrary", "account", "m3", "Clare");
             putBook(tx, "mysqllibrary", "book", "b1", "1984", 0, "George Orwell", "1234567890");
-            putBook(tx, "postgrelibrary", "book", "b2", "To Kill a Mockingbird", 1, "Harper Lee", "0987654321");
+            putBook(tx, "postgrelibrary", "book", "b2", "To Kill a Mockingbird", 1, "Harper Lee", "ISBN-0987654321");
             putTransaction(tx, "mysqllibrary", "transaction", "t1", "b1", "m1", "20240711", "20240725", null, "RESERVED");
             tx.commit();
         } catch (TransactionException e) {
@@ -140,7 +140,7 @@ public class MyLoadInitialData {
                             .textValue("bookTitle", bookTitle)
                             .intValue("isAvailable", isAvailable)
                             .textValue("author", author)
-                            .textValue("ISBN", isbn)
+                            .textValue("isbn", isbn)
                             .build()
             );
         }
