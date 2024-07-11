@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS book;
-CREATE TABLE accounts (
+CREATE TABLE account (
     accountId varchar(10),
     accountName varchar(10),
     PRIMARY KEY (accountId)

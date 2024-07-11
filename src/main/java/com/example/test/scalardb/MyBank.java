@@ -57,7 +57,7 @@ public class MyBank {
       Get get =
         Get.newBuilder()
           .namespace(NAMESPACE)
-          .table("accounts")
+          .table("account")
           .partitionKey(Key.ofText("accountId", id))
           .build();
       Optional<Result> result = tx.get(get);
@@ -73,7 +73,7 @@ public class MyBank {
       Put put =
         Put.newBuilder()
           .namespace(NAMESPACE)
-          .table("accounts")
+          .table("account")
           .partitionKey(Key.ofText("accountId", id))
           .intValue("balance", newBalance)
           .build();
@@ -105,7 +105,7 @@ public class MyBank {
       Get get =
         Get.newBuilder()
           .namespace(NAMESPACE)
-          .table("accounts")
+          .table("account")
           .partitionKey(Key.ofText("accountId", id))
           .build();
       Optional<Result> result = tx.get(get);
@@ -123,7 +123,7 @@ public class MyBank {
       Put put =
         Put.newBuilder()
           .namespace(NAMESPACE)
-          .table("accounts")
+          .table("account")
           .partitionKey(Key.ofText("accountId", id))
           .intValue("balance", newBalance)
           .build();
@@ -165,13 +165,13 @@ public class MyBank {
       Get fromGet =
         Get.newBuilder()
           .namespace(FRNAMESPACE)
-          .table("accounts")
+          .table("account")
           .partitionKey(Key.ofText("accountId", fromId))
           .build();
       Get toGet =
         Get.newBuilder()
           .namespace(TONAMESPACE)
-          .table("accounts")
+          .table("account")
           .partitionKey(Key.ofText("accountId", toId))
           .build();
       Optional<Result> fromResult = tx.get(fromGet);
@@ -192,14 +192,14 @@ public class MyBank {
       Put fromPut =
         Put.newBuilder()
           .namespace(FRNAMESPACE)
-          .table("accounts")
+          .table("account")
           .partitionKey(Key.ofText("accountId", fromId))
           .intValue("balance", newFromBalance)
           .build();
       Put toPut =
         Put.newBuilder()
           .namespace(TONAMESPACE)
-          .table("accounts")
+          .table("account")
           .partitionKey(Key.ofText("accountId", toId))
           .intValue("balance", newToBalance)
           .build();
@@ -224,7 +224,7 @@ public class MyBank {
         Put trPut =
           Put.newBuilder()
             .namespace(FRNAMESPACE)
-            .table("transactions")
+            .table("transaction")
             .partitionKey(Key.ofText("transactionId", transactionId))
             .textValue("fromTable", fromTable)
             .textValue("fromId", fromId)
@@ -239,7 +239,7 @@ public class MyBank {
         Put fromtrPut =
           Put.newBuilder()
             .namespace(FRNAMESPACE)
-            .table("transactions")
+            .table("transaction")
             .partitionKey(Key.ofText("transactionId", transactionId))
             .textValue("fromTable", fromTable)
             .textValue("fromId", fromId)
@@ -253,7 +253,7 @@ public class MyBank {
         Put totrPut =
           Put.newBuilder()
             .namespace(TONAMESPACE)
-            .table("transactions")
+            .table("transaction")
             .partitionKey(Key.ofText("transactionId", transactionId))
             .textValue("fromTable", fromTable)
             .textValue("fromId", fromId)
@@ -287,14 +287,14 @@ public class MyBank {
       Get myGet = 
         Get.newBuilder()
           .namespace("mysqllibrary")
-          .table("transactions")
+          .table("transaction")
           .partitionKey(Key.ofText("transactionId", id))
           .build();
       Optional<Result> myResult = tx.get(myGet);
       Get poGet = 
         Get.newBuilder()
           .namespace("postgrelibrary")
-          .table("transactions")
+          .table("transaction")
           .partitionKey(Key.ofText("transactionId", id))
           .build();
       Optional<Result> poResult = tx.get(poGet);
@@ -325,7 +325,7 @@ public class MyBank {
           Put trPut =
             Put.newBuilder()
               .namespace("mysqllibrary")
-              .table("transactions")
+              .table("transaction")
               .partitionKey(Key.ofText("transactionId", id))
               .intValue("flag", 0)
               .build();
@@ -349,7 +349,7 @@ public class MyBank {
                 Put potrPut =
                   Put.newBuilder()
                     .namespace("postgrelibrary")
-                    .table("transactions")
+                    .table("transaction")
                     .partitionKey(Key.ofText("transactionId", id))
                     .intValue("flag", 0)
                     .build();
@@ -388,13 +388,13 @@ public class MyBank {
         Get fromGet =
           Get.newBuilder()
             .namespace(FRNAMESPACE)
-            .table("accounts")
+            .table("account")
             .partitionKey(Key.ofText("accountId", fromId))
             .build();
         Get toGet =
           Get.newBuilder()
             .namespace(TONAMESPACE)
-            .table("accounts")
+            .table("account")
             .partitionKey(Key.ofText("accountId", toId))
             .build();
         Optional<Result> fromResult = tx.get(fromGet);
@@ -415,14 +415,14 @@ public class MyBank {
         Put fromPut =
           Put.newBuilder()
             .namespace(FRNAMESPACE)
-            .table("accounts")
+            .table("account")
             .partitionKey(Key.ofText("accountId", fromId))
             .intValue("balance", newFromBalance)
             .build();
         Put toPut =
           Put.newBuilder()
             .namespace(TONAMESPACE)
-            .table("accounts")
+            .table("account")
             .partitionKey(Key.ofText("accountId", toId))
             .intValue("balance", newToBalance)
             .build();
@@ -443,7 +443,7 @@ public class MyBank {
           Put trPut =
             Put.newBuilder()
               .namespace("postgrelibrary")
-              .table("transactions")
+              .table("transaction")
               .partitionKey(Key.ofText("transactionId", id))
               .intValue("flag", 0)
               .build();
@@ -496,13 +496,13 @@ public class MyBank {
           Get fromGet =
             Get.newBuilder()
               .namespace(FRNAMESPACE)
-              .table("accounts")
+              .table("account")
               .partitionKey(Key.ofText("accountId", fromId))
               .build();
           Get toGet =
             Get.newBuilder()
               .namespace(TONAMESPACE)
-              .table("accounts")
+              .table("account")
               .partitionKey(Key.ofText("accountId", toId))
               .build();
           Optional<Result> fromResult = tx.get(fromGet);
@@ -523,14 +523,14 @@ public class MyBank {
           Put fromPut =
             Put.newBuilder()
               .namespace(FRNAMESPACE)
-              .table("accounts")
+              .table("account")
               .partitionKey(Key.ofText("accountId", fromId))
               .intValue("balance", newFromBalance)
               .build();
           Put toPut =
             Put.newBuilder()
               .namespace(TONAMESPACE)
-              .table("accounts")
+              .table("account")
               .partitionKey(Key.ofText("accountId", toId))
               .intValue("balance", newToBalance)
               .build();
@@ -567,7 +567,7 @@ public class MyBank {
       Get get =
               Get.newBuilder()
                       .namespace(NAMESPACE)
-                      .table("accounts")
+                      .table("account")
                       .partitionKey(Key.ofText("accountId", id))
                       .build();
       Optional<Result> result = tx.get(get);
@@ -609,7 +609,7 @@ public class MyBank {
       Get get =
         Get.newBuilder()
           .namespace(NAMESPACE)
-          .table("accounts")
+          .table("account")
           .partitionKey(Key.ofText("accountId", id))
           .build();
       Optional<Result> result = tx.get(get);
