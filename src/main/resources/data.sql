@@ -1,7 +1,7 @@
 TRUNCATE TABLE account;
 TRUNCATE TABLE book;
 INSERT INTO account(accountId, accountName)
-values ('m1', 'Andy'),
+values ('m1', 'Lucas'),
        ('m2', 'Becky'),
        ('m3', 'Clare'),
        ('p1', 'Daniel'),

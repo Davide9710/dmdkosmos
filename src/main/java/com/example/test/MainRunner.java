@@ -17,7 +17,7 @@ public class MainRunner implements ApplicationRunner {
         System.out.println("==================== TestApplicationRunner ====================");
         MySchemaLoader.run();
         System.out.println("MySchemaLoader.run(): Succeeded!");
-        MyLoadInitialData.run();
+        //MyLoadInitialData.run();
         System.out.println("MyLoadInitialData.run(): Succeeded!");
     }
 }

@@ -34,7 +34,7 @@ public class MyLoadInitialData {
         DistributedTransaction tx = null;
         try {
             tx = transactionManager.start();
-            putAccount(tx, "mysqllibrary", "account", "m1", "Andy");
+            putAccount(tx, "mysqllibrary", "account", "m1", "Lucas");
             putAccount(tx, "mysqllibrary", "account", "m2", "Becky");
             putAccount(tx, "mysqllibrary", "account", "m3", "Clare");
             putBook(tx, "mysqllibrary", "book", "b1", "1984", 0, "George Orwell", "1234567890");

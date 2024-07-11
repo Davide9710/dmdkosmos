@@ -48,7 +48,7 @@ public class TransactionControllerV2 {
 //        return "return_form";
 //    }
 
-    @PostMapping("/return")
+    @PostMapping("/returnV2")
     public ResponseEntity<String> processReturn(
             @RequestParam("bookId") String bookId,
             Authentication authentication

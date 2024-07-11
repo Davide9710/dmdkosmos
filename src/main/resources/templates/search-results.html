@@ -127,6 +127,9 @@
         <div th:if="${#lists.isEmpty(books)}" class="no-results">
           <p>No books found.</p>
         </div>
+        <div class="view-all-books">
+          <a th:href="@{/reserved-books}" class="view-reserved-button">View Reserved Books</a>
+        </div>
       </div>
     </div>
   </body>
