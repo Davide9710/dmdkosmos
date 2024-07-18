@@ -1,8 +1,8 @@
-# JJE Bank
+# DMD Kosmos
 
 ## About
-DMD Kosmos is a banking system between different databases.
-- Assume a scenario where Bank M, which uses MySQL, and Bank P, which uses PostgreSQL, merge.
+DMD Kosmos is a library system between different universities, which we assume have different databases.
+- Assume a scenario where one University, uses MySQL, and another university, which uses PostgreSQL, wants to have a joint digital library system.
 - Both databases are used without modification.
 - However, it behaves as a single system.
 
@@ -10,16 +10,16 @@ DMD Kosmos is a banking system between different databases.
 <img src="https://github.com/iamtatsuyamori/jjebank/assets/26143847/7cfd52d5-41cd-46d0-b25b-c0e3e6d0c8cf" width="500px">
 
 ## Install Prerequisites
-JJE Bank is written in Java, and uses MySQL and PostgreSQL. So the following software is required to run it.
+DMD Kosmis is written in Java, and uses MySQL and PostgreSQL. So the following software is required to run it.
 - [Oracle OpenJDK 20](https://jdk.java.net/)
 - [MySQL 8.0](https://www.mysql.com/)
 - [PostgreSQL 12.15](https://www.postgresql.org/)
 - [IntelliJ IDEA](https://www.jetbrains.com/ja-jp/idea/) (recommended)
 
 ## System Configurations
-The system configurations of JJE Bank are as follows.
+The system configurations of DMD Kosmos are as follows.
 - Web Framework
-  - [Spring Boot 3.1.1](https://spring.io/projects/spring-boot)
+  - [Spring Boot ] (https://spring.io/projects/spring-boot)
 - Transaction Manager
   - [ScalarDB 3.13](https://scalar-labs.com/ja/products/scalardb)
 - Databases
@@ -75,13 +75,13 @@ $ git clone git@github.com:iamtatsuyamori/jjebank.git
 Before executing ``Main.java``, the user name and password for MySQL and PostgreSQL must be registered in ``scalardb.properties``.
 1. MySQL
 ```properties
-scalar.db.multi_storage.storages.mysql.username=root
-scalar.db.multi_storage.storages.mysql.password=root
+scalar.db.multi_storage.storages.mysql.username=example_username
+scalar.db.multi_storage.storages.mysql.password=example_password
 ```
 2. PostgreSQL
 ```properties
-scalar.db.multi_storage.storages.postgresql.username=postgres
-scalar.db.multi_storage.storages.postgresql.password=root
+scalar.db.multi_storage.storages.postgresql.username=postgresql_username
+scalar.db.multi_storage.storages.postgresql.password=postegresql_password
 ```
 
 ### ``WebSecurityConfig.java``
