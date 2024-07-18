@@ -19,7 +19,7 @@ DMD Kosmis is written in Java, and uses MySQL and PostgreSQL. So the following s
 ## System Configurations
 The system configurations of DMD Kosmos are as follows.
 - Web Framework
-  - [Spring Boot ] (https://spring.io/projects/spring-boot)
+  - [Spring Boot 3.1.1] (https://spring.io/projects/spring-boot)
 - Transaction Manager
   - [ScalarDB 3.13](https://scalar-labs.com/ja/products/scalardb)
 - Databases
@@ -48,27 +48,25 @@ $ git clone git@github.com:iamtatsuyamori/jjebank.git
 
         - ``controllers/``
             - ``IndexController.java`` : Processing when ``index.html`` is loaded
-            - ``RemoveController.java`` : Processing when ``remove_form.html`` and ``remove_result.html`` are loaded
-            - ``TransactionController.java`` : Processing when ``transaction_form.html`` and ``transaction_result.html`` are loaded
-
+            - ``BookController.java`` : Processing when ``index.html`` and ``search-results.html`` are loaded
+            
         - ``models/``
+            - 
 
         - ``scalardb/``
-            - ``MyBank.java`` : ScalarDB processing
-            - ``MyLoadInitialData.java`` : Load initial data into ScalarDB
-            - ``MySchemaLoader.java`` : Load the schema into ScalarDB
+            - ``MyLibrary.java`` : ScalarDB business logic
+            - ``MyLoadInitialData.java`` : Load initial data into ScalarDB, for testing purpose 
 
-        - ``Main.java`` : Main file
+        - ``Main.java`` : Spring Boot main file
 
-        - ``MainRunner.java`` : Run before Spring starts
+        - ``MainRunner.java`` : Configuration bean used for calling the initial data loader
 
-        - ``WebSecurityConfig.java`` : Login information
+        - ``WebSecurityConfig.java`` : Login configurations, users added for testing purpose
 
     - ``resources/``
         - ``static/css/`` : CSS
         - ``templates`` : HTML
-        - ``application.properties`` : Spring setting
-        - ``scalardb.properties`` : ScalarDB setting
+        - ``scalardb.properties`` : ScalarDB settings
         - ``schema.json`` : ScalarDB schema
 
 ### ``scalardb.properties``
@@ -85,33 +83,20 @@ scalar.db.multi_storage.storages.postgresql.password=postegresql_password
 ```
 
 ### ``WebSecurityConfig.java``
-Since the implementation of the login function has not been completed, the login information is written in ``WebSecurityConfig.java``.
+Login functionality is fixed, and the available users for testing purpose are loaded in this file
 
 #### Example
 - Username: ``davide``
 - Password: ``davide``
 
-### ``MyBank.java``
-#### Note
-- accountId is unique (in a table).
-    - There can be user1 in mysql and postgres respectively.
-- transactionId is unique.
-    - fromId, toId, and date are not the same at the same time.
-    - especially date is assumed not identical.
-    - the transactionId is represented by a concatenation of fromId, toId, and date.
-- the name of argument "table".
-    - In the real world, "table" name is regarded as "bank" name.
-- cannot deal with SimpleDateFormat well.
-    - date should be appropriate format.
-    - If date is not expressed in the proper format, unexpected behavior may occur.
-- any errors which developer were unaware may exist.
-    - throw errors for inappropriate operations as much as possible.
-- why date is required?
-    - to make it easy to check the debug.
+#### Functionalities implemented
+- login: the predifined users can login
+- See reserved books : The user, on their index page, can see the books that he has reserved and he didn't return it yet. He can also see the due date of the return. Finally he can, directly from his main page, return the books he reserved.
+- search books : The user can search some keywords on the search bar. The sesrch is a fulltext search on book name or book author. The found books will be displayed in the search-result page, with their availability.
+- When ghe user found a book he wants to reserve, he can check the availability and, if available, book it through the nutton. After that, that book will be listed on his home page.
 
-#### Functions
-- deposit() : Create an account with accountId and initialize its balance with amount, or if accountId account already exists, add amount to the balance.
-- withdraw() : Withdraw amount from accountId account.
-- transfer() : Transfer amount from fromId account to toId account.
-- cancel() : If the conditions are met, cancel the transactionId transaction.
-- getBalance() : Get information about balance of accountId account.
+### Notes
+- In our project researving and borrowing a book are the synonim. Also book.name and book.title refers to the same attribute
+- We added some end-to-end tests on the package src/test. This tests call the endpoints eith a mocked user and check 
+the authorization to perform some operations, and the logic of reserving and returning a book
+- We took inspiration from the project JJE Bank for the organization of the project but the code is almost totally developed on our own, so we argue that our project is not a further development of the JJE Bank but another project. Thus we didn't for the repository.
