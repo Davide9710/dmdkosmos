@@ -7,7 +7,7 @@ DMD Kosmos is a library system between different universities, which we assume h
 - However, it behaves as a single system.
 
 [//]: # (![UseCase]&#40;https://github.com/iamtatsuyamori/jjebank/assets/26143847/7cfd52d5-41cd-46d0-b25b-c0e3e6d0c8cf&#41;)
-<img src="https://github.com/iamtatsuyamori/jjebank/assets/26143847/7cfd52d5-41cd-46d0-b25b-c0e3e6d0c8cf" width="500px">
+<img src="https://github.com/Davide9710/dmdkosmos/blob/main/database.png" width="500px">
 
 ## Install Prerequisites
 DMD Kosmis is written in Java, and uses MySQL and PostgreSQL. So the following software is required to run it.
