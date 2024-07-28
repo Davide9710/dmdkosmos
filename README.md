@@ -6,7 +6,6 @@ DMD Kosmos is a library system between different universities, which we assume h
 - Both databases are used without modification.
 - However, it behaves as a single system.
 
-[//]: # (![UseCase]&#40;https://github.com/iamtatsuyamori/jjebank/assets/26143847/7cfd52d5-41cd-46d0-b25b-c0e3e6d0c8cf&#41;)
 <img src="https://github.com/Davide9710/dmdkosmos/blob/main/database.png" width="500px">
 
 ## Install Prerequisites
@@ -29,7 +28,7 @@ The system configurations of DMD Kosmos are as follows.
 ## How to Run
 1. Open a terminal, go to your work directory, and clone this repository.
 ```shell
-$ git clone git@github.com:iamtatsuyamori/jjebank.git
+$ git clone https://github.com/Davide9710/dmdkosmos.git
 ```
 
 2. Open a project in JetBrains' [IntelliJ IDEA](https://www.jetbrains.com/ja-jp/idea/).
