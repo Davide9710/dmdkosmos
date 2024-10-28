@@ -1,7 +1,7 @@
 # DMD Kosmos
 
 ## About
-DMD Kosmos is a library system between different universities, which we assume have different databases.
+DMD Kosmos is a library system that manages books across different universities, which we assume have different databases.
 - Assume a scenario where one University, uses MySQL, and another university, which uses PostgreSQL, wants to have a joint digital library system.
 - Both databases are used without modification.
 - However, it behaves as a single system.
